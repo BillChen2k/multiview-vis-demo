@@ -1,0 +1,5 @@
+build:
+  docker:
+    web: Dockerfile
+run:
+  web: docker run -d --name multivie-vis -e "PORT=1234" -p 80:1234 web:latest
