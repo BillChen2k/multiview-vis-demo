@@ -1,0 +1,18 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="128" height="128" transform="translate(0 128) rotate(-90)" fill="white"/>
+<mask id="mask0_5:89" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="8" y="8" width="112" height="112">
+<rect x="8" y="120" width="112" height="112" rx="6" transform="rotate(-90 8 120)" fill="black"/>
+</mask>
+<g mask="url(#mask0_5:89)">
+</g>
+<mask id="mask1_5:89" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="8" y="8" width="112" height="112">
+<rect x="8" y="120" width="112" height="112" rx="6" transform="rotate(-90 8 120)" fill="black"/>
+</mask>
+<g mask="url(#mask1_5:89)">
+<rect x="8" y="120" width="32" height="112" transform="rotate(-90 8 120)" fill="#9E9E9E"/>
+<rect x="8" y="80" width="74" height="23" transform="rotate(-90 8 80)" fill="#B5B5B5"/>
+<rect x="97" y="80" width="74" height="23" transform="rotate(-90 97 80)" fill="#B5B5B5"/>
+<rect x="67" y="80" width="74" height="23" transform="rotate(-90 67 80)" fill="#B5B5B5"/>
+<rect x="38" y="80" width="74" height="23" transform="rotate(-90 38 80)" fill="#B5B5B5"/>
+</g>
+</svg>

@@ -1,0 +1,16 @@
+{
+  "layouts": [
+    {
+      "layout_name": "5A",
+      "thumbnail": "./assets/layout/5A.svg",
+      "mv_count": 5,
+      "layout": [[1],[1],[1],[1],[1]]
+    },
+    {
+      "layout_name": "5B",
+      "thumbnail": "./assets/layout/5B.svg",
+      "mv_count": 5,
+      "layout": [[1],[1],[1],[1],[1]]
+    }
+  ]
+}
