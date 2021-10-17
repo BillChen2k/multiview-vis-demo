@@ -22,7 +22,7 @@ export default {
         'June',
       ],
       datasets: [{
-        label: 'My First dataset',
+        label: 'This is just an example chart.',
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgb(255, 99, 132)',
         data: [0, 10, 5, 2, 20, 30, 45],
