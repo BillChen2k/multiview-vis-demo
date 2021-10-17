@@ -2,15 +2,93 @@
   "layouts": [
     {
       "layout_name": "5A",
-      "thumbnail": "./assets/layout/5A.svg",
+      "thumbnail": "assets/layouts/5A.png",
       "mv_count": 5,
-      "layout": [[1],[1],[1],[1],[1]]
+      "layout": []
     },
     {
       "layout_name": "5B",
-      "thumbnail": "./assets/layout/5B.svg",
+      "thumbnail": "assets/layouts/5B.png",
       "mv_count": 5,
-      "layout": [[1],[1],[1],[1],[1]]
+      "layout": []
+    },
+    {
+      "layout_name": "5C",
+      "thumbnail": "assets/layouts/5C.png",
+      "mv_count": 5,
+      "layout": []
+    },
+    {
+      "layout_name": "5D",
+      "thumbnail": "assets/layouts/5D.png",
+      "mv_count": 5,
+      "layout": []
+    },
+    {
+      "layout_name": "5E",
+      "thumbnail": "assets/layouts/5E.png",
+      "mv_count": 5,
+      "layout": []
+    },
+    {
+      "layout_name": "5F",
+      "thumbnail": "assets/layouts/5F.png",
+      "mv_count": 5,
+      "layout": []
+    },
+    {
+      "layout_name": "5G",
+      "thumbnail": "assets/layouts/5G.png",
+      "mv_count": 5,
+      "layout": []
+    },
+    {
+      "layout_name": "5H",
+      "thumbnail": "assets/layouts/5H.png",
+      "mv_count": 5,
+      "layout": []
+    },
+    {
+      "layout_name": "5I",
+      "thumbnail": "assets/layouts/5I.png",
+      "mv_count": 5,
+      "layout": []
+    },
+    {
+      "layout_name": "5J",
+      "thumbnail": "assets/layouts/5J.png",
+      "mv_count": 5,
+      "layout": []
+    },
+    {
+      "layout_name": "5K",
+      "thumbnail": "assets/layouts/5K.png",
+      "mv_count": 5,
+      "layout": []
+    },
+    {
+      "layout_name": "5L",
+      "thumbnail": "assets/layouts/5L.png",
+      "mv_count": 5,
+      "layout": []
+    },
+    {
+      "layout_name": "5M",
+      "thumbnail": "assets/layouts/5M.png",
+      "mv_count": 5,
+      "layout": []
+    },
+    {
+      "layout_name": "5N",
+      "thumbnail": "assets/layouts/5N.png",
+      "mv_count": 5,
+      "layout": []
+    },
+    {
+      "layout_name": "5O",
+      "thumbnail": "assets/layouts/5O.png",
+      "mv_count": 5,
+      "layout": []
     }
   ]
 }
