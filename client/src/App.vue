@@ -74,6 +74,10 @@ export default {
     TreeViewer
   },
 
+  mounted() {
+
+  },
+
   data: () => ({
 
   })
