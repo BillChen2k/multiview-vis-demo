@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
 import core
+import pandas as pd
+import numpy as np
 app = Flask(__name__)
 
 # enable CORS
@@ -13,6 +15,11 @@ def hello_world():
 @app.route('/api/generate')
 def generate():
     pass
+
+@app.route('/api/test')
+def test_api():
+    v = np.array([1,2,3])
+    return str(v[2])
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
