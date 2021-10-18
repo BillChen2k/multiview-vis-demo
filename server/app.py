@@ -13,7 +13,8 @@ def hello_world():
     return 'This is the api.'
 
 @app.route('/api/generate')
-def generate():
+def generate_graph(csv_path, mv_count, k1, k2):
+    # todo: returns graph
     pass
 
 @app.route('/api/test')

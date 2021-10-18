@@ -3,6 +3,7 @@
     <v-card-title>File Selection</v-card-title>
     <v-card-text>
       <v-file-input
+          dense
           truncate-length="20"
           show-size="true"
           accept="text/csv"

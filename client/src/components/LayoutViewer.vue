@@ -4,12 +4,18 @@
     <v-card-text>
       <p>The depth of the color indicates the visual importance value of the layout.</p>
       <div class="d-inline-flex" style="overflow-x: auto; max-width: 700px">
-          <div v-for="layout in layouts"  :key="layout.layout_name" style="border-radius: 12px">
-            <v-img
-                :src="layout.thumbnail"
-                width="64px" height="64px"
-                class="mx-1 hover-gray"
-            ></v-img>
+          <div v-for="layout in layouts"  :key="layout.layout_name">
+
+              <v-img
+                  :src="layout.thumbnail"
+                  width="64px" height="64px"
+                  class="mx-1 hover-gray"
+              ></v-img>
+
+          <div class="px-6 text-sm-caption">
+            <p>{{ layout.layout_name }}</p>
+          </div>
+
           </div>
       </div>
     </v-card-text>

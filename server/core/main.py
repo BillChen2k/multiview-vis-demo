@@ -249,18 +249,19 @@ def computeScore(Layout_list, index_nodes, node_score_list, Importance_list, rou
     return index_1, index_2, dic
 
 
+
 get_data(5, 'FlightDelayStatistics2015.csv') #读取数据
 get_nodes_scores(5) #得到节点名称 并计算分数
-#print(nodes)
-#print(nodes_scores)
+print(nodes)
+print(nodes_scores)
 get_route_scores()
-#print(route_scores)
+print(route_scores)
 get_nodes_index(5)
-#print(nodes_index)
-#print(index_nodes)
+print(nodes_index)
+print(index_nodes)
 get_tree(max(nodes_scores, key=nodes_scores.get), nodes.copy(), nodes_scores.copy(), route_scores, nodes_index)
 #print(nodes_index[max(nodes_scores, key=nodes_scores.get)]) #树的最高节点
-#print(tree)
+print(tree)
 get_importance(5, [0,0,0,0,0])
 #print(Importance)
 #print(usable_index_nodes)

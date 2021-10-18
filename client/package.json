@@ -10,6 +10,7 @@
   "dependencies": {
     "chart.js": "^2.7.1",
     "core-js": "^3.6.5",
+    "d3": "^7.1.1",
     "vue": "^2.6.11",
     "vue-chartjs": "^3.4.0",
     "vuetify": "^2.4.0"
@@ -39,7 +40,9 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "no-unused-vars": "off"
+    }
   },
   "browserslist": [
     "> 1%",

@@ -1,7 +1,14 @@
 <template>
   <v-card outlined width="100%">
     <v-card-title>Multiview Chart Preview</v-card-title>
-    <LineChart :data="data" :options="{}" height="200px"></LineChart>
+
+    <v-card-text>
+      <!--    <LineChart :data="data" :options="{}" height="200px"></LineChart>-->
+      <v-row v-if="selectedLayout">
+
+      </v-row>
+
+    </v-card-text>
   </v-card>
 </template>
 
@@ -9,9 +16,9 @@
 import LineChart from "./charts/LineChart";
 export default {
   name: "MultiviewChartPreview",
-  components: {LineChart},
-
+  components: {},
   data: () => ({
+    selectedLayout: null,
     data: {
       labels: [
         'January',
