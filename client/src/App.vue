@@ -27,14 +27,16 @@
 
           <v-col lg="3">
             <file-selector class="my-3"></file-selector>
+            <graph-viewer class="my-3"></graph-viewer>
             <parameter-selector class="my-3"></parameter-selector>
-            <tree-viewer class="my-3"></tree-viewer>
+
+<!--            <tree-viewer class="my-3"></tree-viewer>-->
+
           </v-col>
 
           <v-col lg="6">
-            <v-row no-gutters>
-              <graph-viewer class="my-3"></graph-viewer>
-            </v-row>
+<!--            <v-row no-gutters>-->
+<!--            </v-row>-->
             <v-row no-gutters>
               <layout-viewer class="my-3"></layout-viewer>
             </v-row>
@@ -79,13 +81,10 @@ export default {
     FileSelector,
     LayoutViewer,
     MultiviewChartPreview,
-    ParameterSelector,
-    TreeViewer
+    ParameterSelector
   },
   mounted() {
     setTimeout(() => {
-      alert("EMITTED");
-      EventBus.$emit(consts.events.GRAPH_DATA_LOADED, {msg: "I emited the data!"});
 
     }, 1000);
   },
@@ -93,7 +92,6 @@ export default {
   data: () => ({
     currentStage: 0,
     selectedFile: "",
-
   })
 
 };

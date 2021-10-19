@@ -1,5 +1,10 @@
 {
   "events": {
-    "GRAPH_DATA_LOADED": "GRAPH_DATA_LOADED"
-  }
+    "GRAPH_DATA_LOADED": "graph-data-loaded",
+    "WILL_POST_API": "will-post-api",
+    "DID_POST_API": "did-post-api",
+    "DID_SELECT_FILE": "did-select-file",
+    "DID_SELECT_LAYOUT": "did-select-layout"
+  },
+  "api": "http://127.0.0.1:5000"
 }

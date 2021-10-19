@@ -1,23 +1,49 @@
 <template>
   <v-card outlined width="100%">
     <v-card-title>Layouts</v-card-title>
-    <v-card-text>
-      <p>The depth of the color indicates the visual importance value of the layout.</p>
-      <div class="d-inline-flex" style="overflow-x: auto; max-width: 700px">
-          <div v-for="layout in layouts"  :key="layout.layout_name">
+    <v-card-text v-if="dataFeeded">
+      <p>The depth of the color indicates the visual importance value of the layout.<br/> Number below indicates the recommendation score of the layout.</p>
 
-              <v-img
-                  :src="layout.thumbnail"
-                  width="64px" height="64px"
-                  class="mx-1 hover-gray"
-              ></v-img>
+      <v-container style="margin: 0; padding: 0" fluid>
+        <v-col class="d-inline-flex" style="overflow-x: auto;">
 
-          <div class="px-6 text-sm-caption">
-            <p>{{ layout.layout_name }}</p>
+          <div v-for="[layout_cid, layout] in this.recommend_layout_cols"  :key="layout_cid">
+            <v-tooltip top offset-overflow="12">
+              <template v-slot:activator="{ on, attrs }">
+                <div v-bind="attrs"
+                     @click="selectLayoutCol(layout_cid)"
+                     v-on="on">
+                  <v-img
+                      :src="layout.details.thumbnail"
+                      width="64px" height="64px"
+                      class="mr-1 hover-gray"
+                      :id="layout_cid"
+
+                  ></v-img>
+
+                  <div class="px-6 text-sm-caption">
+                    <span> {{ layout.layout_name }} </span>
+                  </div>
+                  <div class="text-sm-caption text-center">
+                    <span> {{ layout.score.toFixed(2) }}</span>
+                  </div>
+                </div>
+
+              </template>
+
+              <span>Path: {{ layout.order.toString() }}</span>
+
+            </v-tooltip>
+
+
           </div>
+        </v-col>
+      </v-container>
 
-          </div>
-      </div>
+    </v-card-text>
+
+    <v-card-text v-else>
+      No data selected.
     </v-card-text>
 
   </v-card>
@@ -26,19 +52,57 @@
 <script>
 
 import layoutData from '../config/layout-config.json';
+import ExampleLayout from '../assets/graph/example_layout.json';
+import { EventBus } from "../plugins/event-bus";
+import consts from "../config/consts.json";
 
 export default {
   name: "LayoutViewer",
 
   data: () => ({
+    dataFeeded: false,
     layouts: layoutData.layouts,
+    recommend_layout_cols: null,
   }),
 
   mounted() {
-    this.layouts = this.layouts.map(one => {
-      one.thumbnail = require(`@/${one.thumbnail}`);
-      return one;
-    })
+    EventBus.$on(consts.events.DID_SELECT_FILE, () => {
+      this.dataFeeded = true;
+      this.loadLayouts();
+    });
+  },
+
+  methods: {
+    loadLayouts: function() {
+      this.layouts = this.layouts.map(one => {
+        one.thumbnail = require(`@/${one.thumbnail}`);
+        return one;
+      })
+      let allLayoutsCols = ExampleLayout.layout;
+      allLayoutsCols.sort((a, b) => {
+        return b.score - a.score;
+      });
+      let recommend_layout_cols = new Map();
+      let nameLayoutMap = new Map();
+      this.layouts.forEach(one => { nameLayoutMap.set(one["layout_name"], one); });
+      for (const [i, layout] of allLayoutsCols.entries()) {
+        if (!recommend_layout_cols.has(layout["layout_name"])) {
+          recommend_layout_cols.set(layout["layout_name"], {...layout, rank: i, details: nameLayoutMap.get(layout["layout_name"])});
+        }
+        if (recommend_layout_cols.size == 8) {
+          // break; //todo: uncomment
+        }
+      }
+      console.log(recommend_layout_cols);
+      this.recommend_layout_cols = recommend_layout_cols;
+    },
+
+    selectLayoutCol: function(layout_cid) {
+      const layout_cols = this.recommend_layout_cols.get(layout_cid);
+      EventBus.$emit(consts.events.DID_SELECT_LAYOUT, {
+        layout_cols
+      });
+    }
   }
 
 

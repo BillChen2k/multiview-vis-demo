@@ -10,22 +10,26 @@
             "id": 0,
             "importance": 1
           }
-        ],[
+        ],
+        [
           {
             "id": 1,
             "importance": 1
           }
-        ],[
+        ],
+        [
           {
             "id": 2,
             "importance": 1
           }
-        ],[
+        ],
+        [
           {
             "id": 3,
             "importance": 1
           }
-        ],[
+        ],
+        [
           {
             "id": 4,
             "importance": 1
@@ -171,13 +175,72 @@
       "layout_name": "5F",
       "thumbnail": "assets/layouts/5F.png",
       "mv_count": 5,
-      "layout": []
+      "layout": [
+        [
+          {
+            "id": 0,
+            "importance": 2
+          },
+          {
+            "id": 1,
+            "importance": 2
+          }
+        ],
+        [
+          {
+            "id": 2,
+            "importance": 1
+          }
+        ],
+        [
+          {
+            "id": 3,
+            "importance": 2
+          },
+          {
+            "id": 4,
+            "importance": 2
+          }
+        ]
+      ]
     },
     {
       "layout_name": "5G",
       "thumbnail": "assets/layouts/5G.png",
       "mv_count": 5,
-      "layout": []
+      "layout": [
+        [
+          [
+            {
+              "id": 0,
+              "importance": 1
+            }
+          ],
+          [
+            {
+              "id": 1,
+              "importance": 2
+            },
+            {
+              "id": 4,
+              "importance": 2
+            }
+
+          ],
+          [
+            {
+              "id": 2,
+              "importance": 1
+            }
+          ],
+          [
+            {
+              "id": 3,
+              "importance": 1
+            }
+          ]
+        ]
+      ]
     },
     {
       "layout_name": "5H",
@@ -225,7 +288,8 @@
       "layout_name": "5O",
       "thumbnail": "assets/layouts/5O.png",
       "mv_count": 5,
-      "layout": []
+      "layout": [
+      ]
     }
   ]
 }
