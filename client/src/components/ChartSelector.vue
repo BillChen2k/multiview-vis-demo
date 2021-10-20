@@ -1,6 +1,6 @@
 <template>
   <v-card outlined :loading="loading">
-    <v-card-title>Chart Selector</v-card-title>
+    <v-card-title>Candidate Charts</v-card-title>
     <v-card-text v-if="selectedViewId == -1">
       No view selected.
     </v-card-text>
@@ -12,7 +12,7 @@
 
       <template v-for="(item, index) in chartData">
         <v-row @click="didSelectChartData(index)" :key="index" class="chart-container mb-2 mx-1">
-          <echart :tabledata="item" ></echart>
+          <echart :tabledata="item" height="208px" ></echart>
         </v-row>
       </template>
     </v-card-text>
@@ -58,6 +58,7 @@ export default {
     EventBus.$on(consts.events.DID_POST_API, ( { charts }) => {
       console.log("Received chart data.");
       console.log(charts);
+      charts = charts.map(one => { one.table_name = " "; return one;});
       this.loading = false;
       this.chartData = charts;
     })

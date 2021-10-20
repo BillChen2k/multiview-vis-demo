@@ -1,6 +1,6 @@
 <template>
   <v-card outlined width="100%">
-    <v-card-title>Layouts</v-card-title>
+    <v-card-title>Layout Gallary</v-card-title>
     <v-card-text v-if="dataFeeded">
       <p>The depth of the color indicates the visual importance value of the layout.<br/> Number below indicates the recommendation score of the layout.</p>
 

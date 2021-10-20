@@ -46,7 +46,7 @@ export default {
             fontSize: "50%"
           },
           left: "center",
-          top: "5%",
+          top: "0%",
           padding: 5,
           itemGap: 10
         },
@@ -123,7 +123,7 @@ export default {
           },
           subtext: this.tabledata["describe"],
           left: "center",
-          top: "5%",
+          top: "0%",
           padding: 5,
           itemGap: 10
         },
@@ -199,7 +199,7 @@ export default {
           },
           subtext: this.tabledata["describe"],
           left: "center",
-          top: "5%",
+          top: "0%",
           padding: 5,
           itemGap: 10
         },
@@ -312,7 +312,7 @@ export default {
             fontSize: "50%"
           },
           left: "center",
-          top: "5%",
+          top: "0%",
           padding: 5,
           itemGap: 10
         },
@@ -396,7 +396,7 @@ export default {
             fontSize: "50%"
           },
           left: "center",
-          top: "5%",
+          top: "0%",
           padding: 5,
           itemGap: 10
         },
@@ -485,7 +485,7 @@ export default {
             fontSize: "50%"
           },
           left: "center",
-          top: "5%",
+          top: "0%",
           padding: 5,
           itemGap: 10
         },

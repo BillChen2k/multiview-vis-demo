@@ -1,9 +1,11 @@
 <template>
   <v-card outlined>
-    <v-card-title>Parameter Selector</v-card-title>
+    <v-card-title>Parameter Tuner</v-card-title>
     <v-card-text>
       <p>
-        Here you can alternate the parameters to get different results.
+        Here you can alternate the parameters to get different results.<br>
+        K1 and K2 are the weighting factors used in path recommendation, T1 and T2
+        are the weighting factors used in infomation-layout recommendation.
       </p>
       <v-row no-gutters>
         <v-col class="pa-2" sm="2"><code>MV:</code></v-col>

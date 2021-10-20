@@ -1,5 +1,7 @@
 # multiview-vis-demo
 
+![2021-10-20-fKpOTG](https://billc.oss-cn-shanghai.aliyuncs.com/img/2021-10-20-fKpOTG.png)
+
 ## Local deployment
 
 Make sure docker is properly installed, then:

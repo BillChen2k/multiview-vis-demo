@@ -1,6 +1,6 @@
 <template>
   <v-card outlined width="100%">
-    <v-card-title>Multiview Chart Preview</v-card-title>
+    <v-card-title>Dashboard Preview</v-card-title>
     <v-card-text>
       <div v-show="dataFed">
         <v-row>
@@ -221,7 +221,7 @@ export default {
       let echart = new echartCtr({
         propsData: {
           tabledata: chartData,
-          height: `${gridDom.clientHeight - 10}px`
+          height: `${gridDom.offsetHeight - 30}px`
         }
       });
       echart.$mount(`#multiview-echart-no${this.selectedGridId}`);
