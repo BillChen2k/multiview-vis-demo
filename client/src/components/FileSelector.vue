@@ -33,7 +33,7 @@ import axios from "axios";
 import consts from "../config/consts.json";
 import { EventBus } from "../plugins/event-bus";
 
-const api = process.env.NODE_ENV == 'development' ? consts.api : 'api/';
+const api = process.env.NODE_ENV == 'development' ? consts.api : 'api';
 
 export default {
   name: "FileSelector",

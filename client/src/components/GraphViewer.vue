@@ -228,7 +228,8 @@ export default {
             // invalidation // a promise to stop the simulation when the cell is re-run
           });
       let graphContainer = document.getElementById("graph");
-      document.getElementById("graph").appendChild(graphDom);
+      while(graphContainer.firstChild) graphContainer.removeChild(graphContainer.firstChild);
+      graphContainer.appendChild(graphDom);
       const svg = d3.select("#graphsvg");
 
     }

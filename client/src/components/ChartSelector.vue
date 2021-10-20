@@ -11,7 +11,7 @@
       </p>
 
       <template v-for="(item, index) in chartData">
-        <v-row @click="didSelectChartData(index)" :key="index" class="chart-container mb-2">
+        <v-row @click="didSelectChartData(index)" :key="index" class="chart-container mb-2 mx-1">
           <echart :tabledata="item" ></echart>
         </v-row>
       </template>
