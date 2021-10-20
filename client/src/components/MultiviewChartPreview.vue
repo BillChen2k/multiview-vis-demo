@@ -2,9 +2,23 @@
   <v-card outlined width="100%">
     <v-card-title>Multiview Chart Preview</v-card-title>
     <v-card-text>
-      <!--    <LineChart :data="data" :options="{}" height="200px"></LineChart>-->
       <div v-show="dataFed">
-        <p>The layout you chose is: <b>{{ this.selectedLayoutCols.layout_name }}</b></p>
+        <v-row>
+          <v-col sm="8">
+            <p>The layout you chose is: <b>{{ this.selectedLayoutCols.layout_name }}</b></p>
+          </v-col>
+          <v-col sm="4" >
+            <v-btn
+                @click="downloadMultiview"
+                style="top: -6px"
+                class="float-sm-right"
+                color="dark-grey"
+                icon outlined>
+              <v-icon>mdi-download</v-icon>
+            </v-btn>
+            <span class="float-sm-right mr-2">Download image:</span>
+          </v-col>
+        </v-row>
         <div id="multiview-container" class="multiview-container">
 
 <!--                    <div class="multiview-container-row">-->
@@ -47,6 +61,7 @@ import consts from "../config/consts.json";
 import ExampleGraph from "../assets/graph/example_graph.json";
 import Echart from "./charts/EChart";
 import Vue from "vue";
+import html2canvas from "html2canvas"
 
 export default {
   name: "MultiviewChartPreview",
@@ -211,6 +226,29 @@ export default {
       });
       echart.$mount(`#multiview-echart-no${this.selectedGridId}`);
       console.log("chart injected.");
+    },
+
+    downloadMultiview: function() {
+      function saveAs(uri, filename) {
+        let link = document.createElement('a');
+        if (typeof link.download === 'string') {
+          link.href = uri;
+          link.download = filename;
+          // Firefox requires the link to be in the body
+          document.body.appendChild(link);
+          //simulate click
+          link.click();
+          //remove the link when done
+          document.body.removeChild(link);
+        } else {
+          window.open(uri);
+        }
+      }
+      html2canvas(document.getElementById("multiview-container")).then( (canvas) => {
+          // canvas is the final rendered <canvas> element
+          saveAs(canvas.toDataURL(), `Multiview_${new Date().getTime()}.png`);
+          console.log("Image captured.");
+      })
     }
 
   }
