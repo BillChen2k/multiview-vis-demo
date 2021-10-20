@@ -1,27 +1,33 @@
 <template>
-  <div ref="myChart" :style="{width: '100%', height: '400px'}"></div>
+  <v-container fluid>
+    <div ref="myChart" :style="{width: '100%', height: this.height}"></div>
+  </v-container>
 </template>
 
 <script>
 // 引入基本模板
-let echarts = require('echarts/lib/echarts')
+// let echarts = require('echarts/lib/echarts');
 // 引入柱状图组件
-require('echarts/lib/chart/bar')
-// 引入提示框和title组件
-require('echarts/lib/component/tooltip')
-require('echarts/lib/component/title')
+// require('echarts/lib/chart/bar');
+// // 引入提示框和title组件
+// require('echarts/lib/component/tooltip');
+// require('echarts/lib/component/title');
+// require('echarts/lib/component/grid');
+
+import * as echarts from 'echarts';
 
 export default {
-  name: "chart",
+  name: "echart",
   props:{
-    tabledata:{
+    tabledata: {
       required: true
+    },
+    height: {
+      required: false,
+      default: '280px'
     }
   },
-  data(){
-    return{
-    }
-  },
+  data: () => ({}),
   mounted() {
     this.drawchart()
   },
@@ -36,6 +42,9 @@ export default {
         title: {
           text: this.tabledata["table_name"],
           subtext: this.tabledata["describe"],
+          textStyle: {
+            fontSize: "50%"
+          },
           left: "center",
           top: "5%",
           padding: 5,
@@ -109,6 +118,9 @@ export default {
       myechart.setOption({
         title: {
           text: this.tabledata["table_name"],
+          textStyle: {
+            fontSize: "50%"
+          },
           subtext: this.tabledata["describe"],
           left: "center",
           top: "5%",
@@ -182,6 +194,9 @@ export default {
       myechart.setOption({
         title: {
           text: this.tabledata["table_name"],
+          textStyle: {
+            fontSize: "50%"
+          },
           subtext: this.tabledata["describe"],
           left: "center",
           top: "5%",
@@ -293,6 +308,9 @@ export default {
         title: {
           text: this.tabledata["table_name"],
           subtext: this.tabledata["describe"],
+          textStyle: {
+            fontSize: "50%"
+          },
           left: "center",
           top: "5%",
           padding: 5,
@@ -374,6 +392,9 @@ export default {
         title: {
           text: this.tabledata["table_name"],
           subtext: this.tabledata["describe"],
+          textStyle: {
+            fontSize: "50%"
+          },
           left: "center",
           top: "5%",
           padding: 5,
@@ -460,6 +481,9 @@ export default {
         title: {
           text: this.tabledata["table_name"],
           subtext: this.tabledata["describe"],
+          textStyle: {
+            fontSize: "50%"
+          },
           left: "center",
           top: "5%",
           padding: 5,
@@ -521,6 +545,7 @@ export default {
         series: myseries
       });
     },
+
     drawchart(){
       let myChart = echarts.init(this.$refs['myChart'])
       // 绘制图表

@@ -1,11 +1,10 @@
 <template>
   <v-card outlined width="100%">
     <v-card-title>Multiview Chart Preview</v-card-title>
-
     <v-card-text>
       <!--    <LineChart :data="data" :options="{}" height="200px"></LineChart>-->
       <div v-show="dataFed">
-        The layout you chose is: <b>{{ this.selectedLayoutCols.layout_name }}</b>
+        <p>The layout you chose is: <b>{{ this.selectedLayoutCols.layout_name }}</b></p>
         <div id="multiview-container" class="multiview-container">
 
 <!--                    <div class="multiview-container-row">-->
@@ -42,11 +41,12 @@
 </template>
 
 <script>
-import LineChart from "./charts/LineChart";
 import * as d3 from "d3";
 import { EventBus } from "../plugins/event-bus";
 import consts from "../config/consts.json";
 import ExampleGraph from "../assets/graph/example_graph.json";
+import Echart from "./charts/EChart";
+import Vue from "vue";
 
 export default {
   name: "MultiviewChartPreview",
@@ -54,8 +54,11 @@ export default {
   data: () => ({
     dataFed: false,
     selectedLayoutCols: {},
-    csvColumn: [],
+    selectedGridId: -1,
+    csvColumnNames: new Map(),
+    csvColumn: new Map(),
     gridConfig: [],
+    chartData: new Map(),
     data: {
       labels: [
         'January',
@@ -94,6 +97,10 @@ export default {
       this.selectedLayoutCols = layout_cols;
       this.prepareData();
     });
+
+    EventBus.$on(consts.events.DID_SELECT_CHART_RESULT, ({ chartData }) => {
+      this.injectChart(chartData);
+    });
   },
 
   methods: {
@@ -109,8 +116,15 @@ export default {
       this.renderMultiviewGrid(this.gridConfig, container, true);
     },
 
+    loadColumnName: function(grid_id, node_id) {
+      let node = ExampleGraph.vertex.filter(one => one.id == node_id);
+      let columnNames = node[0].name.split("_");
+      this.csvColumnNames.set(grid_id, columnNames);
+      this.csvColumn.set(grid_id, node[0].col);
+      return columnNames;
+    },
+
     renderMultiviewGrid: function(rootGrid, rootDom, horizon = true) {
-      console.log(rootGrid, rootDom, horizon);
       if (rootGrid instanceof Array) {
         for(let subGrid of rootGrid) {
           let subDom = document.createElement("div");
@@ -121,14 +135,84 @@ export default {
       }
       else {
         let item = document.createElement("div");
-        item.className = `multiview-item importance-${rootGrid.importance}`;
+        item.addEventListener('click', (e) => {
+          this.gridSelected(rootGrid.id);
+        });
+        item.className = `importance-${rootGrid.importance} multiview-item `;
         item.setAttribute("id", `multiview-item-no${rootGrid.id}`);
-        let text =document.createElement("p");
-        text.innerHTML = `importance: ${rootGrid.importance} <br/> id: ${rootGrid.id}`;
+        const columnNames = this.loadColumnName(rootGrid.id, this.selectedLayoutCols.order[rootGrid.id]);
+        let text = document.createElement("p");
+        text.className = `pa-2`;
+        text.innerHTML = `importance: ${rootGrid.importance} <br/> id: ${rootGrid.id} <br/> columns: ${columnNames.join(", ")}`;
         item.appendChild(text);
         rootDom.appendChild(item);
       }
+    },
+
+    gridSelected: function(grid_id) {
+
+      if (this.selectedGridId == -1) {
+        let gridDom = document.getElementById(`multiview-item-no${grid_id}`);
+        gridDom.classList.add("multiview-selected");
+        this.selectedGridId = grid_id;
+        EventBus.$emit(consts.events.DID_SELECT_SUBVIEW, {
+          grid_id: grid_id,
+          column_names: this.csvColumnNames.get(grid_id),
+          columns: this.csvColumn.get(grid_id)
+        });
+      }
+      else {
+        let oldGridDom = document.getElementById(`multiview-item-no${this.selectedGridId}`);
+        oldGridDom.classList.remove("multiview-selected");
+        if (this.selectedGridId == grid_id) {
+          // Unselect
+          this.selectedGridId = -1;
+          EventBus.$emit(consts.events.DID_SELECT_SUBVIEW, {
+            grid_id: -1,
+            column_names: [],
+            columns: []
+          });
+        }
+        else {
+          // Unselect and select new
+          let gridDom = document.getElementById(`multiview-item-no${grid_id}`);
+          gridDom.classList.add("multiview-selected");
+          this.selectedGridId = grid_id;
+          EventBus.$emit(consts.events.DID_SELECT_SUBVIEW, {
+            grid_id: grid_id,
+            column_names: this.csvColumnNames.get(grid_id),
+            columns: this.csvColumn.get(grid_id)
+          });
+        }
+      }
+    },
+
+    injectChart: function(chartData) {
+      if (this.selectedGridId == -1) {
+        console.warn("No grid selected.");
+        return;
+      }
+      let gridDom = document.getElementById(`multiview-item-no${this.selectedGridId}`);
+      gridDom.removeChild(gridDom.lastChild);     // remove text or echat component
+      gridDom.classList.add("multiview-echart-item");
+      for (let i of ["importance-1", "importance-2", "importance-3", "multiview-item"]) {
+        gridDom.classList.remove(i);
+      }
+      let echartContainer = document.createElement("div");
+      echartContainer.setAttribute("id", `multiview-echart-no${this.selectedGridId}`);
+      gridDom.appendChild(echartContainer);
+
+      let echartCtr = Vue.extend(Echart);
+      let echart = new echartCtr({
+        propsData: {
+          tabledata: chartData,
+          height: `${gridDom.clientHeight - 10}px`
+        }
+      });
+      echart.$mount(`#multiview-echart-no${this.selectedGridId}`);
+      console.log("chart injected.");
     }
+
   }
 }
 </script>
@@ -139,7 +223,7 @@ export default {
   flex-direction: column;
   flex-wrap: nowrap;
   width: 100%;
-  height: 500px;
+  height: 700px;
 }
 
 .multiview-container-row {
@@ -162,7 +246,28 @@ export default {
 .multiview-item {
   flex: 1;
   background-color: aliceblue;
-  border: black 1px solid;
+  border: white 2px solid;
+  border-radius: 6px;
+  transition-duration: 0.3s;
+}
+
+.multiview-item:hover {
+  background-color: #eaf9ff;
+}
+
+.multiview-echart-item {
+  flex: 1;
+  background-color: white;
+  border: #dcdcdc 1px solid;
+  /*box-shadow: #CECECE 2px 2px 2px;*/
+  margin: 2px;
+  border-radius: 6px;
+  transition-duration: 0.3s;
+}
+
+.multiview-selected {
+  background-color: #fcd9bd !important;
+  font-weight: bold;
 }
 
 .importance-1 {

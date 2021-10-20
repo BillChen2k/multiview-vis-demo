@@ -4,7 +4,9 @@
     "WILL_POST_API": "will-post-api",
     "DID_POST_API": "did-post-api",
     "DID_SELECT_FILE": "did-select-file",
-    "DID_SELECT_LAYOUT": "did-select-layout"
+    "DID_SELECT_LAYOUT": "did-select-layout",
+    "DID_SELECT_SUBVIEW": "did-select-subview",
+    "DID_SELECT_CHART_RESULT": "did-select-chart-result"
   },
-  "api": "http://127.0.0.1:5000"
+  "api": "http://127.0.0.1:5000/api"
 }

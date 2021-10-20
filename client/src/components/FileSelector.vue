@@ -33,6 +33,7 @@ import axios from "axios";
 import consts from "../config/consts.json";
 import { EventBus } from "../plugins/event-bus";
 
+const api = process.env.NODE_ENV == 'development' ? consts.api : 'api/';
 
 export default {
   name: "FileSelector",
@@ -41,39 +42,37 @@ export default {
     selectedFile: null,
   }),
   mounted() {
-    EventBus.$on(consts.events.WILL_POST_API, (e) => {
-
-    })
+    EventBus.$on(consts.events.DID_SELECT_SUBVIEW, ({ grid_id, column_names, columns}) => {
+      this.postForResult(columns);
+    });
   },
   methods: {
     didSelectFile: function() {
       console.log(this.selectedFile);
-      if (this.selectedFile) {
-        EventBus.$emit(consts.events.DID_SELECT_FILE, {});
-      }
+      setTimeout(() => {
+        if (this.selectedFile) {
+          EventBus.$emit(consts.events.DID_SELECT_FILE, {});
+        }
+      }, 1000);
     },
     postForResult: function(columsToGenerate) {
-      console.log(columsToGenerate);
       let formData = new FormData()
       if (this.selectedFile){
         formData.append("file", this.selectedFile)
-        console.log(formData.getAll("file"))
-        console.log(this.selectedFile)
-        axios.post(consts.api + "/getcharts",
-            {
-              files: formData,
-              cols: columsToGenerate
-            },
+        formData.append('cols', columsToGenerate);
+        axios.post(api + "/getcharts",
+            formData,
             {
               headers: {
                 'Content-Type': 'multipart/form-data'
               }
-            }).then( response => {
-          console.log('Success!')
-          console.log({response})
-        }).catch(error => {
+            })
+          .then( response => {
+              console.log({response});
+              EventBus.$emit(consts.events.DID_POST_API, { charts: response.data });
+          }).catch(error => {
           console.log({error})
-        })
+        });
       }
     }
   }

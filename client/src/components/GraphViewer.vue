@@ -212,9 +212,9 @@ export default {
         }
       }
       console.log(edges);
-      let margin = {top: 10, right: 10, bottom: 10, left: 10};
-      const w = 450 - margin.left - margin.right;
-      const h = 360 - margin.top - margin.bottom;
+      let margin = {top: 0, right: 0, bottom: 0, left: 0};
+      const w = 350 - margin.left - margin.right;
+      const h = 350 - margin.top - margin.bottom;
 
       const graphDom = this.forceGraph({nodes: this.graph.vertex, links: edges},
           {
@@ -227,6 +227,7 @@ export default {
             height: h,
             // invalidation // a promise to stop the simulation when the cell is re-run
           });
+      let graphContainer = document.getElementById("graph");
       document.getElementById("graph").appendChild(graphDom);
       const svg = d3.select("#graphsvg");
 
