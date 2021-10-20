@@ -1,0 +1,184 @@
+
+import os
+import time
+
+from recommand.chart import Chart
+
+class ViewPosition(object):
+    """
+    Attributes:
+        table_pos(int): the index of the table in the table list.
+        view_pos(int): the index of the view in the view list.
+    """
+    def __init__(self, table_pos, view_pos):
+        self.table_pos = table_pos
+        self.view_pos = view_pos
+
+class Instance(object):
+    """
+    Attributes:
+        table_name(str): the name of the table corresponding to this instance.
+        column_num(int): the number of columns.
+        tuple_num(int): the number of columns after transformation.
+        table_num(int): the number of tables after transformation.
+        view_num(int): the number of views.
+        tables(list): the list of tables.
+        views(list): the list of views.
+    """
+    def __init__(self, table_name):
+        self.table_name = table_name
+        self.column_num = self.tuple_num = 0 # the number of the column and row of the original data
+        self.table_num = self.view_num = 0
+        self.tables = []
+        self.views = []
+
+    def addTable(self, table):
+        self.tables.append(table)
+        self.table_num += 1
+
+    def addTables(self, tables):
+        for table in tables:
+            self.addTable(table)
+
+    def getA(self):
+        """
+
+        :return:
+        """
+        min_line = 1000
+        for table in self.tables:
+            for view in table.views:
+                if view.chart == Chart.line and view.tuple_num // view.series_num < min_line:
+                    min_line = view.tuple_num // view.series_num
+
+        for table in self.tables:
+            for view in table.views:
+                if view.chart == Chart.bar:
+                    if view.tuple_num // view.series_num == 1:
+                        view.A = 0
+                    elif 2 <= view.tuple_num // view.series_num <= 7:
+                        view.A = 1.0
+                    else:
+                        view.A = 7 / (view.tuple_num // view.series_num)
+                elif view.chart == Chart.pie:
+                    if view.tuple_num // view.series_num == 1:
+                        view.A = 0
+                    elif 2 <= view.tuple_num // view.series_num <= 5:
+                        view.A = 1.0
+                    else:
+                        view.A = 5 / (view.tuple_num // view.series_num)
+                elif view.chart == Chart.scatter:
+                    view.A = 1.0
+                else:
+                    if view.tuple_num // view.series_num <= 10:
+                        view.A = 1.0
+                    else:
+                        view.A = min_line / (view.tuple_num // view.series_num)
+
+        # for table in self.tables:
+        #     for view in table.views:
+        #         view.A = view.A + view.Q
+
+    def getE(self):
+        """
+
+        :return:
+        """
+        max_E = [0, 0, 0, 0]
+        for table in self.tables:
+            for view in table.views:
+                if view.E > max_E[view.chart]:
+                    max_E[view.chart] = view.E
+
+        for table in self.tables:
+            for view in table.views:
+                if max_E[view.chart] == 0:
+                    view.E = 0
+                else:
+                    view.E = 1.0 * view.E / max_E[view.chart]
+
+    def getW(self):
+        """
+
+        :return:
+        """
+        weight = [0 for i in range(self.column_num)]
+        for table in self.tables:
+            for view in table.views:
+                weight[view.fx.origin] += 1
+                weight[view.fy.origin] += 1
+                if view.z_id != -1: # for 3D views
+                    weight[view.z_id] += 1
+        for i in range(self.column_num):
+            weight[i] = 1.0 * weight[i] / self.view_num
+        for table in self.tables:
+            for view in table.views:
+                view.W = weight[view.fx.origin] + weight[view.fy.origin]
+                if view.z_id != -1:
+                    view.W += weight[view.z_id]
+        max_W = -1
+        for table in self.tables:
+            for view in table.views:
+                if view.W > max_W:
+                    max_W = view.W
+        for table in self.tables:
+            for view in table.views:
+                view.W = view.W / max_W
+
+    def getScore(self):
+        """
+        For partial_order method, get score of each view
+
+        Args:
+            None
+
+        Returns:
+            None
+
+        """
+        for i in range(self.table_num):
+            self.views.extend([ViewPosition(i,view_pos) for view_pos in range(self.tables[i].view_num)])
+
+        G = [[-1 for i in range(self.view_num)] for j in range(self.view_num)]
+        out_edge_num = [0 for i in range(self.view_num)]
+        score = [0 for i in range(self.view_num)]
+        for i in range(self.view_num):
+            for j in range(self.view_num):
+                if i != j:
+                    view_i = self.tables[self.views[i].table_pos].views[self.views[i].view_pos]
+                    view_j = self.tables[self.views[j].table_pos].views[self.views[j].view_pos]
+                    # if view_i.M >= view_j.M and view_i.Q >= view_j.Q and view_i.W >= view_j.W:
+                    #     if view_i.M == view_j.M and view_i.Q == view_j.Q and view_i.W == view_j.W:
+                    #         continue
+                    #     # G[i][j] = (view_i.M - view_j.M + view_i.Q - view_j.Q + view_i.W - view_j.W) / 3.0
+                    #     G[i][j] = (view_i.E - view_j.E + view_i.A - view_j.A + view_i.W - view_j.W) / 3.0
+                    #     out_edge_num[i] += 1
+                    if view_i.E >= view_j.E and view_i.A >= view_j.A and view_i.W >= view_j.W:
+                        if view_i.E == view_j.E and view_i.A == view_j.A and view_i.W == view_j.W:
+                            continue
+                        G[i][j] = (view_i.E - view_j.E + view_i.A - view_j.A + view_i.W - view_j.W) / 3.0
+                        out_edge_num[i] += 1
+        for remove_time in range(self.view_num-1):
+            for i in range(self.view_num):
+                if out_edge_num[i] == 0:
+                    for j in range(self.view_num):
+                        if G[j][i] >= 0:
+                            score[j] += G[j][i] + score[i]
+                            G[j][i] = -1
+                            out_edge_num[i] = -1
+                            out_edge_num[j] -= 1
+                    break
+        for i in range(self.view_num):
+            self.tables[self.views[i].table_pos].views[self.views[i].view_pos].score = score[i]
+            print(i)
+            print("A =", self.tables[self.views[i].table_pos].views[self.views[i].view_pos].A)
+            print("E =", self.tables[self.views[i].table_pos].views[self.views[i].view_pos].E)
+            # print("M =", self.tables[self.views[i].table_pos].views[self.views[i].view_pos].M)
+            # print("Q =", self.tables[self.views[i].table_pos].views[self.views[i].view_pos].Q)
+            print("W =", self.tables[self.views[i].table_pos].views[self.views[i].view_pos].W)
+            print("chart =", Chart.chart[self.tables[self.views[i].table_pos].views[self.views[i].view_pos].chart])
+            print("score:", score[i])
+        #sort by scores
+        self.views.sort(key=lambda view:self.tables[view.table_pos].views[view.view_pos].score,reverse=True)
+        for i in range(self.view_num):
+            print("score[",i,"], ", self.tables[self.views[i].table_pos].views[self.views[i].view_pos].score)
