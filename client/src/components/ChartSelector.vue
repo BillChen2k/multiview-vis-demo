@@ -9,7 +9,9 @@
         Generated following chart recommendation based on column: <br>
         <b>{{ columnNames.join(", ") }}</b>.
       </p>
-
+      <p v-if="chartData.length == 0 && !loading" class="warning--text text-body-1">
+        <i>No chart recommendation generated. You may need to try another dataset.</i>
+      </p>
       <template v-for="(item, index) in chartData">
         <v-row @click="didSelectChartData(index)" :key="index" class="chart-container mb-2 mx-1">
           <echart :tabledata="item" height="208px" ></echart>

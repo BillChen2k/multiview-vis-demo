@@ -96,7 +96,10 @@ export default {
     EventBus.$on(consts.events.DID_SELECT_LAYOUT, ( { layout_cols }) => {
       console.log("did select layout");
       console.log(layout_cols);
-      this.dataFed = true;
+      this.dataFed = layout_cols ? true : false;
+      if (!layout_cols) {
+        return;
+      }
       // {
       //     "layout_name": "5C",
       //     "order": [4,5,7,8,0]
@@ -210,7 +213,7 @@ export default {
       let gridDom = document.getElementById(`multiview-item-no${this.selectedGridId}`);
       gridDom.removeChild(gridDom.lastChild);     // remove text or echat component
       gridDom.classList.add("multiview-echart-item");
-      for (let i of ["importance-1", "importance-2", "importance-3", "multiview-item"]) {
+      for (let i of ["importance-1", "importance-2", "importance-3", "importance-4", "multiview-item"]) {
         gridDom.classList.remove(i);
       }
       let echartContainer = document.createElement("div");
@@ -261,7 +264,7 @@ export default {
   flex-direction: column;
   flex-wrap: nowrap;
   width: 100%;
-  height: 700px;
+  height: 720px;
 }
 
 .multiview-container-row {

@@ -172,7 +172,7 @@ class myrecommend(object):
             begin_id += 1
         if instance.view_num == 0:
             print ('no chart generated')
-            sys.exit(0)
+        #   sys.exit(0)
         return instance
 
     def ranking(self):
@@ -183,11 +183,14 @@ class myrecommend(object):
         instance = Instance(self.table_name)
         instance = self.init_instance(instance)
         instance = self.generate_all_views(instance)
-        instance.getW()
-        instance.getE()
-        instance.getA()
-        instance.getScore()
-        self.instance = instance
+        if instance.view_num == 0:
+            self.instance = instance
+        else:
+            instance.getW()
+            instance.getE()
+            instance.getA()
+            instance.getScore()
+            self.instance = instance
 
     # output function
     def to_list(self):

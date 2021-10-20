@@ -3,6 +3,7 @@
     {
       "layout_name": "5A",
       "thumbnail": "assets/layouts/5A.png",
+      "layoutgraph": "assets/layouts/layoutgraph/5A.png",
       "mv_count": 5,
       "layout": [
         [
@@ -40,6 +41,7 @@
     {
       "layout_name": "5B",
       "thumbnail": "assets/layouts/5B.png",
+      "layoutgraph": "assets/layouts/layoutgraph/5B.png",
       "mv_count": 5,
       "layout": [
         [
@@ -71,6 +73,7 @@
     {
       "layout_name": "5C",
       "thumbnail": "assets/layouts/5C.png",
+      "layoutgraph": "assets/layouts/layoutgraph/5C.png",
       "mv_count": 5,
       "layout": [
         [
@@ -108,6 +111,7 @@
     {
       "layout_name": "5D",
       "thumbnail": "assets/layouts/5D.png",
+      "layoutgraph": "assets/layouts/layoutgraph/5D.png",
       "mv_count": 5,
       "layout": [
         [
@@ -143,6 +147,7 @@
     {
       "layout_name": "5E",
       "thumbnail": "assets/layouts/5E.png",
+      "layoutgraph": "assets/layouts/layoutgraph/5E.png",
       "mv_count": 5,
       "layout": [
         [
@@ -174,6 +179,7 @@
     {
       "layout_name": "5F",
       "thumbnail": "assets/layouts/5F.png",
+      "layoutgraph": "assets/layouts/layoutgraph/5F.png",
       "mv_count": 5,
       "layout": [
         [
@@ -207,6 +213,7 @@
     {
       "layout_name": "5G",
       "thumbnail": "assets/layouts/5G.png",
+      "layoutgraph": "assets/layouts/layoutgraph/5G.png",
       "mv_count": 5,
       "layout": [
         [
@@ -245,50 +252,353 @@
     {
       "layout_name": "5H",
       "thumbnail": "assets/layouts/5H.png",
+      "layoutgraph": "assets/layouts/layoutgraph/5H.png",
       "mv_count": 5,
-      "layout": []
+      "layout": [
+        [
+          [
+            [
+              [
+                {
+                  "id": 0,
+                  "importance": 3
+                }
+              ],
+              [
+                {
+                  "id": 1,
+                  "importance": 4
+                },
+                {
+                  "id": 3,
+                  "importance": 4
+                }
+              ]
+            ],
+            [
+              {
+                "id": 4,
+                "importance": 2
+              }
+            ]
+          ],
+          [
+            {
+              "id": 2,
+              "importance": 1
+            }
+          ]
+        ]
+      ]
     },
     {
       "layout_name": "5I",
       "thumbnail": "assets/layouts/5I.png",
+      "layoutgraph": "assets/layouts/layoutgraph/5I.png",
       "mv_count": 5,
-      "layout": []
+      "layout": [
+        [
+          [
+            {
+              "id": 0,
+              "importance": 1
+            }
+          ],
+          [
+            [
+              {
+                "id": 1,
+                "importance": 3
+              },
+              {
+                "id": 2,
+                "importance": 3
+              }
+            ],
+            [
+              {
+                "id": 3,
+                "importance": 2
+              }
+            ],
+            [
+              {
+                "id": 4,
+                "importance": 2
+              }
+            ]
+          ]
+        ]
+      ]
     },
     {
       "layout_name": "5J",
       "thumbnail": "assets/layouts/5J.png",
+      "layoutgraph": "assets/layouts/layoutgraph/5J.png",
       "mv_count": 5,
-      "layout": []
+      "layout": [
+        [
+          [
+            {
+              "id": 0,
+              "importance": 1
+            }
+          ],
+          [
+            [
+              {
+                "id": 1,
+                "importance": 2
+              }
+            ],
+            [
+              {
+                "id": 2,
+                "importance": 3
+              },
+              {
+                "id": 3,
+                "importance": 3
+              }
+            ],
+            [
+              {
+                "id": 4,
+                "importance": 2
+              }
+            ]
+          ]
+        ]
+      ]
     },
     {
       "layout_name": "5K",
       "thumbnail": "assets/layouts/5K.png",
+      "layoutgraph": "assets/layouts/layoutgraph/5K.png",
       "mv_count": 5,
-      "layout": []
+      "layout": [
+        [
+          [
+            {
+              "id": 0,
+              "importance": 1
+            }
+          ],
+          [
+            {
+              "id": 1,
+              "importance": 2
+            },
+            {
+              "id": 3,
+              "importance": 2
+            },
+            {
+              "id": 4,
+              "importance": 2
+            }
+          ],
+          [
+            {
+              "id": 2,
+              "importance": 1
+            }
+          ]
+        ]
+      ]
     },
     {
       "layout_name": "5L",
       "thumbnail": "assets/layouts/5L.png",
+      "layoutgraph": "assets/layouts/layoutgraph/5L.png",
       "mv_count": 5,
-      "layout": []
+      "layout": [
+        [
+          [
+            {
+              "id": 0,
+              "importance": 2
+            }
+          ],
+          [
+            {
+              "id": 1,
+              "importance": 2
+            }
+          ],
+          [
+            {
+              "id": 2,
+              "importance": 1
+            },
+            {
+              "id": 3,
+              "importance": 1
+            },
+            {
+              "id": 4,
+              "importance": 1
+            }
+          ]
+        ]
+      ]
     },
     {
       "layout_name": "5M",
       "thumbnail": "assets/layouts/5M.png",
+      "layoutgraph": "assets/layouts/layoutgraph/5M.png",
       "mv_count": 5,
-      "layout": []
+      "layout": [
+        [
+          [
+            {
+              "id": 0,
+              "importance": 1
+            }
+          ],
+          [
+            [
+              {
+                "id": 1,
+                "importance": 3
+              },
+              {
+                "id": 2,
+                "importance": 3
+              }
+            ],
+            [
+              {
+                "id": 4,
+                "importance": 2
+              }
+            ]
+          ],
+          [
+            {
+              "id": 3,
+              "importance": 1
+            }
+          ]
+        ]
+      ]
     },
     {
       "layout_name": "5N",
       "thumbnail": "assets/layouts/5N.png",
+      "layoutgraph": "assets/layouts/layoutgraph/5N.png",
       "mv_count": 5,
-      "layout": []
+      "layout": [
+        [
+          [
+            {
+              "id": 2,
+              "importance": 2
+            }
+          ],
+          [
+            [
+              {
+                "id": 1,
+                "importance": 3
+              }
+            ],
+            [
+              {
+                "id": 3,
+                "importance": 3
+              }
+            ]
+          ],
+          [
+            {
+              "id": 2,
+              "importance": 2
+            }
+          ]
+        ],
+        [
+          {
+            "id": 4,
+            "importance": 1
+          }
+        ]
+      ]
     },
     {
       "layout_name": "5O",
       "thumbnail": "assets/layouts/5O.png",
+      "layoutgraph": "assets/layouts/layoutgraph/5O.png",
       "mv_count": 5,
       "layout": [
+        [
+          [
+            {
+              "id": 0,
+              "importance": 2
+            }
+          ],
+          [
+            [
+              {
+                "id": 1,
+                "importance": 4
+              },
+              {
+                "id": 2,
+                "importance": 4
+              }
+            ],
+            [
+              {
+                "id": 3,
+                "importance": 3
+              }
+            ]
+          ]
+        ],
+        [
+          {
+            "id": 4,
+            "importance": 1
+          }
+        ]
+      ]
+    },
+    {
+      "layout_name": "5P",
+      "thumbnail": "assets/layouts/5P.png",
+      "layoutgraph": "assets/layouts/layoutgraph/5P.png",
+      "mv_count": 5,
+      "layout": [
+        [
+          {
+            "id": 0,
+            "importance": 1
+          }
+        ],
+        [
+          {
+            "id": 1,
+            "importance": 1
+          }
+        ],
+        [
+          {
+            "id": 2,
+            "importance": 1
+          }
+        ],
+        [
+          {
+            "id": 3,
+            "importance": 2
+          },
+          {
+            "id": 4,
+            "importance": 2
+          }
+        ]
       ]
     }
   ]

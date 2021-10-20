@@ -1,5 +1,5 @@
 <template>
-  <v-card outlined>
+  <v-card outlined :loading="loading">
     <v-card-title>Parameter Tuner</v-card-title>
     <v-card-text>
       <p>
@@ -57,7 +57,8 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn depressed>Confirm</v-btn>
+        <p v-if="!fileSelected" class="warning--text mx-2 mt-2">You need to select file first.</p>
+        <v-btn :disabled="!fileSelected" @click="confirmParameter" depressed>Confirm</v-btn>
       </v-card-actions>
 
     </v-card-text>
@@ -65,20 +66,42 @@
 </template>
 
 <script>
+import { EventBus } from "../plugins/event-bus";
+import consts from "../config/consts.json";
+
 export default {
   name: "ParameterSelector",
   data: () => ({
+    loading: false,
+    fileSelected: false,
     dataSource: {
-      mvcount: [5,6,7]
+      mvcount: [4, 5, 6, 7]
     },
     parameter: {
-      mv: 5,
+      mv: 4,
       k1: 0.5,
       k2: 0.5,
       t1: 0.5,
       t2: 0.5
+    },
+  }),
+  mounted() {
+    EventBus.$on(consts.events.DID_SELECT_FILE, ( { file }) => {
+      this.fileSelected = file ? true : false;
+    })
+  },
+  methods: {
+    confirmParameter: function () {
+      this.loading = true;
+      setTimeout(() => {
+        EventBus.$emit(consts.events.DID_SELECT_PARAMETER,
+            { parameter: this.parameter,
+              layoutData: {},
+              graphData: {}});
+        this.loading = false;
+      }, Math.random() * 1000 + 500);
     }
-  })
+  }
 }
 </script>
 

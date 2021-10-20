@@ -27,8 +27,8 @@
 
           <v-col lg="3">
             <file-selector class="my-3"></file-selector>
-            <graph-viewer class="my-3"></graph-viewer>
             <parameter-selector class="my-3"></parameter-selector>
+            <graph-viewer class="my-3"></graph-viewer>
 
 <!--            <tree-viewer class="my-3"></tree-viewer>-->
 

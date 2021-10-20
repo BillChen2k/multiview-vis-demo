@@ -41,6 +41,7 @@ def getCharts(myfile):
     # dp.learning_to_rank()
     # dp.partial_order()
     # dp.diversified_ranking()
+
     dp.ranking()
 
     # output functions

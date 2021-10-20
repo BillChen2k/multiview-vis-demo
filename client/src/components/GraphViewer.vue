@@ -32,11 +32,16 @@ export default {
     }
   }),
   mounted() {
-    EventBus.$on(consts.events.DID_SELECT_FILE, () => {
-      console.log("did select file.");
+    EventBus.$on(consts.events.DID_SELECT_PARAMETER, ( { parameter, graphData, layoutData }) => {
+      console.log("did select param.");
       this.dataFeeded = true;
+      //todo: Feed the graph
       this.generateGraph();
-    })
+    });
+    EventBus.$on(consts.events.DID_SELECT_FILE, ({ file }) => {
+      if (!file) this.dataFeeded = false;
+    });
+
   },
   methods: {
     forceGraph: function({

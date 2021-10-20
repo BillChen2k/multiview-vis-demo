@@ -50,10 +50,8 @@ export default {
     didSelectFile: function() {
       console.log(this.selectedFile);
       setTimeout(() => {
-        if (this.selectedFile) {
-          EventBus.$emit(consts.events.DID_SELECT_FILE, {});
-        }
-      }, 1000);
+          EventBus.$emit(consts.events.DID_SELECT_FILE, { file: this.selectedFile });
+      }, 100);
     },
     postForResult: function(columsToGenerate) {
       let formData = new FormData()
