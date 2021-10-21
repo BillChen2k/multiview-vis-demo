@@ -125,7 +125,7 @@ export default {
     prepareData: function() {
       this.gridConfig = this.selectedLayoutCols.details.layout;
       this.selectedLayoutCols.order.forEach(one => {
-        let node = ExampleGraph.vertex.filter(v => v.id == one)[0];
+        let node = ExampleGraph.vertex.filter(v => v.id == one)[0] || ExampleGraph.vertex[0];
         let cols = node.cols;
         let cols_name = node.name.split("_");
       })
@@ -135,10 +135,10 @@ export default {
     },
 
     loadColumnName: function(grid_id, node_id) {
-      let node = ExampleGraph.vertex.filter(one => one.id == node_id);
-      let columnNames = node[0].name.split("_");
+      let node = ExampleGraph.vertex.filter(one => one.id == node_id)[0] || ExampleGraph.vertex[0];
+      let columnNames = node.name.split("_");
       this.csvColumnNames.set(grid_id, columnNames);
-      this.csvColumn.set(grid_id, node[0].col);
+      this.csvColumn.set(grid_id, node.col);
       return columnNames;
     },
 

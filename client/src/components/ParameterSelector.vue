@@ -5,7 +5,7 @@
       <p>
         Here you can alternate the parameters to get different results.<br>
         K1 and K2 are the weighting factors used in path recommendation, T1 and T2
-        are the weighting factors used in infomation-layout recommendation.
+        are the weighting factors used in information-layout recommendation.
       </p>
       <v-row no-gutters>
         <v-col class="pa-2" sm="2"><code>MV:</code></v-col>

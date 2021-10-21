@@ -6,7 +6,7 @@
       dark
     >
       <div class="d-flex align-center">
-        <h3>Multiview Chart Preview</h3>
+        <h3> Data-driven Dashboard Recommendation System </h3>
       </div>
 
       <v-spacer></v-spacer>

@@ -1,6 +1,6 @@
 <template>
   <v-card outlined  width="100%">
-    <v-card-title>Infomation Network</v-card-title>
+    <v-card-title>Information Network</v-card-title>
     <v-card-text>
       <div v-show="dataFeeded">
         <v-container fluid id="graph-container">

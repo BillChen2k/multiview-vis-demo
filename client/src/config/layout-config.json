@@ -600,6 +600,94 @@
           }
         ]
       ]
+    },
+    {
+      "layout_name": "6G",
+      "thumbnail": "assets/layouts/6G.png",
+      "layoutgraph": "assets/layouts/layoutgraph/6G.png",
+      "mv_count": 6,
+      "layout": [
+        [
+          [
+            {
+              "id": 0,
+              "importance": 1
+            }
+          ],
+          [
+            {
+              "id": 1,
+              "importance": 3
+            },
+            {
+              "id": 2,
+              "importance": 3
+            }
+          ]
+        ],
+        [
+          {
+            "id": 3,
+            "importance": 2
+          },
+          {
+            "id": 4,
+            "importance": 2
+          },
+          {
+            "id": 5,
+            "importance": 2
+          }
+        ]
+      ]
+    },
+    {
+      "layout_name": "7E",
+      "thumbnail": "assets/layouts/7E.png",
+      "layoutgraph": "assets/layouts/layoutgraph/7E.png",
+      "mv_count": 7,
+      "layout": [
+        [
+          [
+            {
+              "id": 0,
+              "importance": 1
+            }
+          ],
+          [
+            [
+              {
+                "id": 1,
+                "importance": 2
+              },
+              {
+                "id":  2,
+                "importance": 2
+              }
+            ],
+            [
+              {
+                "id": 4,
+                "importance": 3
+              },
+              {
+                "id": 5,
+                "importance": 3
+              },
+              {
+                "id": 6,
+                "importance": 3
+              }
+            ]
+          ],
+          [
+            {
+              "id": 3,
+              "importance": 1
+            }
+          ]
+        ]
+      ]
     }
   ]
 }

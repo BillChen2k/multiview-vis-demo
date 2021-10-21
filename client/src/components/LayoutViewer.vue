@@ -1,6 +1,6 @@
 <template>
   <v-card outlined width="100%">
-    <v-card-title>Layout Gallary</v-card-title>
+    <v-card-title>Layout Gallery</v-card-title>
     <v-card-text v-if="dataFeeded">
       <p>The depth of the color indicates the visual importance value of the layout.<br/> Number below indicates the recommendation score of the layout.</p>
 
@@ -21,10 +21,10 @@
                         width="64px" height="64px"
                         class="mr-1 hover-gray"
                         :id="layout_cid"
-                        @mouseenter="hoverOnLayout(layout.layout_name)"
+                        @mouseenter="hoverOnLayout(layout.details.layout_name)"
                     ></v-img>
                     <div class="px-6 text-sm-caption">
-                      <span> {{ layout.layout_name }} </span>
+                      <span> {{ layout.details.layout_name }} </span>
                     </div>
                     <div class="text-sm-caption text-center">
                       <span> {{ layout.score.toFixed(2) }}</span>
@@ -111,9 +111,14 @@ export default {
           recommend_layout_cols.set(layout["layout_name"], {...layout, rank: i, details: nameLayoutMap.get(layout["layout_name"])});
         }
         if (recommend_layout_cols.size == 8) {
-          // break; //todo: uncomment
+          // break; //todo: uncomment, limiting the upper bound of the layout recommendation count.
         }
       }
+      // todo: debug only
+      // recommend_layout_cols.set("6G", {...allLayoutsCols[0], details: nameLayoutMap.get("6G")});
+      // recommend_layout_cols.set("7E", {...allLayoutsCols[3], details: nameLayoutMap.get("7E")});
+      // debug onlyo finished.
+
       console.log(recommend_layout_cols);
       this.recommend_layout_cols = recommend_layout_cols;
     },

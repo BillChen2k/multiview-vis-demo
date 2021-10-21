@@ -13,7 +13,6 @@ ALLOWED_EXTENSIONS = {'csv', 'txt', 'pdf', 'png', 'jpg', 'jpeg', }
 dp = recommand.myrecommend()
 
 app = Flask(__name__)
-CORS(app, resources=r'/*')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # enable CORS
@@ -37,13 +36,10 @@ def cleanFolder():
 def getCharts(myfile):
     dp.read_csv(myfile)
     # choose one from three ranking function
-
     # dp.learning_to_rank()
     # dp.partial_order()
     # dp.diversified_ranking()
-
     dp.ranking()
-
     # output functions
     # can use several different methods at the same time
 
@@ -76,11 +72,6 @@ def getCharts(myfile):
 @app.route('/api')
 def hello_world():
     return 'This is the api.'
-
-@app.route('/api/generate')
-def generate_graph(csv_path, mv_count, k1, k2):
-    # todo: returns graph
-    pass
 
 @app.route('/api/getcharts', methods=['POST'])
 def getcharts():
